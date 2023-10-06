@@ -8,19 +8,24 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\sliu2\\.nuget\\packages\\": {}
+    "C:\\Users\\2271168\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\sliu2\\Dropbox\\PC\\Desktop\\Studying\\.Inutile\\CsharpTest\\test\\test.csproj",
+      "projectUniqueName": "C:\\Users\\2271168\\Some repos\\CsharpTest\\test\\test.csproj",
       "projectName": "test",
-      "projectPath": "C:\\Users\\sliu2\\Dropbox\\PC\\Desktop\\Studying\\.Inutile\\CsharpTest\\test\\test.csproj",
-      "packagesPath": "C:\\Users\\sliu2\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\sliu2\\Dropbox\\PC\\Desktop\\Studying\\.Inutile\\CsharpTest\\test\\obj\\",
+      "projectPath": "C:\\Users\\2271168\\Some repos\\CsharpTest\\test\\test.csproj",
+      "packagesPath": "C:\\Users\\2271168\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\2271168\\Some repos\\CsharpTest\\test\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\sliu2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\2271168\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +66,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
