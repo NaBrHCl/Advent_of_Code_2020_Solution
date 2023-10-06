@@ -1,113 +1,103 @@
-﻿using static System.Console;
+﻿using System.Text;
+using static System.Console;
 
 namespace test
 {
     internal class Program
     {
-        // https://adventofcode.com/2020/day/5
+        // https://adventofcode.com/2020/day/6
 
         static void Main(string[] args)
         {
-            const string FILE_PATH = "./input.txt";
+            const string FILE_PATH = "./testInput.txt";
 
-            string[] passes = File.ReadAllLines(FILE_PATH);
-            int[] seatIDs = new int[passes.Length];
+            string[] groups = GetGroupAnswers(FILE_PATH);
 
-            seatIDs[0] = ProcessSeat(passes[0]);
+            int sum = 0;
 
-            for (int i = 1; i < passes.Length; i++)
-                seatIDs[i] = ProcessSeat(passes[i]);
-
-            ShellSort(seatIDs);
-
-            foreach (int seatID in seatIDs)
-                WriteLine(seatID);
-
-            int mySeatID = GetOwnSeatPass(seatIDs);
-
-            WriteLine($"My seat ID is {mySeatID}");
-        }
-
-        // passed array needs to be sorted
-        static int GetOwnSeatPass(int[] seatIDs)
-        {
-            for (int i = 0; i < seatIDs.Length - 1; i++)
+            foreach (string group in groups)
             {
-                if (seatIDs[i + 1] - seatIDs[i] > 1)
-                    return seatIDs[i] + 1;
+                int answerCount = GetAnswerCount(group);
+                sum += answerCount;
+                WriteLine(answerCount);
             }
 
-            return -1;
+            WriteLine($"The sum is {sum}");
         }
 
-        static void ShellSort(int[] a)
+        static string[] GetGroupAnswers(string filePath)
         {
+            List<string> groups = new List<string>();
+
+            StreamReader sr = new StreamReader(filePath);
+
+            string answer = string.Empty;
+
+            while (!sr.EndOfStream)
+            {
+                string line = sr.ReadLine();
+
+                if (line != string.Empty)
+                    answer += line;
+                else
+                {
+                    groups.Add(answer);
+                    answer = String.Empty;
+                }
+            }
+
+            groups.Add(answer);
+
+            sr.Close();
+
+            return groups.ToArray();
+        }
+
+        static string ShellSort(string str)
+        {
+            char[] a = str.ToCharArray();
+
             for (int gap = a.Length / 2; gap >= 1; gap /= 2)
             {
                 for (int j = gap; j < a.Length; j++)
                 {
-                    for (int i = j - gap; i >= 0; i -= gap)
+                    for (int i = j; i >= 0; i -= gap)
                     {
                         if (a[i] > a[i + gap])
                         {
                             // swap a[i] with a[i + gap]
-                            int b = a[i];
+                            char c = a[i];
                             a[i] = a[i + gap];
-                            a[i + gap] = b;
+                            a[i + gap] = c;
                         }
                     }
                 }
             }
+
+            return a.ToString();
         }
 
-        static void TakeHalf(bool upper, ref int lowerBound, ref int upperBound)
+        static string RemoveRedundantLetter(string str)
         {
-            int pivot = (lowerBound + upperBound) / 2;
+            StringBuilder a = new StringBuilder();
 
-            if (upper)
-                lowerBound = pivot + 1;
-            else
-                upperBound = pivot;
-        }
+            a.Append(str[0]);
 
-        static int GetSeatId(int row, int column)
-        {
-            return row * 8 + column;
-        }
-
-        static void ChangeRow(char c, ref int lowerRow, ref int upperRow)
-        {
-            switch (c)
+            for (int i = 1; i < str.Length; i++)
             {
-                case 'F': TakeHalf(false, ref lowerRow, ref upperRow); break;
-                case 'B': TakeHalf(true, ref lowerRow, ref upperRow); break;
+                if (a[a.Length - 1] != str[i])
+                    a.Append(str[i]);
             }
+
+            return a.ToString();
         }
 
-        static void ChangeColumn(char c, ref int lowerColumn, ref int upperColumn)
+        static int GetAnswerCount(string answer)
         {
-            switch (c)
-            {
-                case 'L': TakeHalf(false, ref lowerColumn, ref upperColumn); break;
-                case 'R': TakeHalf(true, ref lowerColumn, ref upperColumn); break;
-            }
-        }
+            answer = ShellSort(answer);
+            answer = RemoveRedundantLetter(answer);
 
-        static int ProcessSeat(string code)
-        {
-            const int PIVOT = 7;
-            int lowerColumn = 0, upperColumn = 7;
-            int lowerRow = 0, upperRow = 127;
-
-            // row
-            for (int i = 0; i < PIVOT; i++)
-                ChangeRow(code[i], ref lowerRow, ref upperRow);
-
-            // column
-            for (int i = PIVOT; i < code.Length; i++)
-                ChangeColumn(code[i], ref lowerColumn, ref upperColumn);
-
-            return GetSeatId(upperRow, upperColumn);
+            return answer.Length;
         }
     }
 }
