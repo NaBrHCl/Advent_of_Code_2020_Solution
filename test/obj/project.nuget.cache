@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FHyHRGv2mjG/ySaCSetfkQlACT31smNa1snoRzJiOoJaU/vHbWkOgC3TwOkINPHnOlptkzHWnn4Ond4elAr3UA==",
+  "dgSpecHash": "0z/1RuLTGYEk96v5fuptD1giHv5pJMd+4/nCezBfYJPffib3UZs3EE6lO+Dtbn4PigW1TWotMrDZsQH3aHvExQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\2271168\\Some repos\\CsharpTest\\test\\test.csproj",
+  "projectFilePath": "C:\\Users\\2271168\\Some repos\\Advent_of_Code_2020_Solution\\test\\test.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
