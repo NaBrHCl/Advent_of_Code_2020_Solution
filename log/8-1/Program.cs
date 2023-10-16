@@ -13,7 +13,7 @@ namespace test
 
             string[] instructions = ReadFromFile(FILE_PATH);
 
-            int accumulator = GetCorrectAccumulator(instructions);
+            int accumulator = RunInstructions(instructions);
 
             WriteLine(accumulator);
         }
@@ -38,38 +38,9 @@ namespace test
             argument = int.Parse(info[1]);
         }
 
-        static int GetCorrectAccumulator(string[] instructions)
+        static int RunInstructions(string[] instructions)
         {
-            for (int i = 0; i < instructions.Length; i++)
-            {
-                if (TryFlipInstruction(instructions, i))
-                {
-                    if (TryRunInstructions(instructions, out int accumulator))
-                        return accumulator;
-                    else
-                        TryFlipInstruction(instructions, i);
-                }
-            }
-
-            throw new Exception("Correct Accumulator can't be obtained");
-        }
-
-        static bool TryFlipInstruction(string[] instructions, int i)
-        {
-            ParseInstruction(instructions[i], out int operation, out int argument);
-
-            if (operation == 1)
-                return false;
-
-            instructions[i] = $"{((operation == 0)? "jmp": "nop")} {argument}";
-
-            return true;
-        }
-
-        static bool TryRunInstructions(string[] instructions, out int accumulator)
-        {
-            accumulator = 0;
-
+            int accumulator = 0;
             List<int> executedLineNums = new List<int>();
 
             for (int i = 0; i < instructions.Length; i++)
@@ -84,13 +55,10 @@ namespace test
                         i += jump.Value - 1; // i gets incremented by 1 when looping again
                 }
                 else
-                {
-                    accumulator = 0;
-                    return false;
-                }
+                    break;
             }
 
-            return true;
+            return accumulator;
         }
 
         // passed in list must be sorted (ascending order)
